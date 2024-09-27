@@ -19,8 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
       body {
@@ -625,58 +623,17 @@
         },
       });
 
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-
-          const targetId = this.getAttribute('href').substring(1);
-          const targetElement = document.getElementById(targetId);
-
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 60, // Adjust for fixed header
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-    </script>
-
-    <!-- Initialize Locomotive Scroll -->
-    <script>
-      const scroll = new LocomotiveScroll({
-        el: document.querySelector('[data-scroll-container]'),
-        smooth: true,
-        smartphone: {
-          smooth: true
-        },
-        tablet: {
-          smooth: true
-        }
-      });
-
-      // Update scroll for GSAP animations
-      scroll.on('scroll', ScrollTrigger.update);
-
-      // Update locomotive scroll when window resizes
-      ScrollTrigger.addEventListener('refresh', () => scroll.update());
-
-      // Update ScrollTrigger and reset scroll position
-      ScrollTrigger.refresh();
-
-      // Handle anchor links
+      // Basic anchor link handling without smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
           const targetId = this.getAttribute('href').substring(1);
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
-            scroll.scrollTo(targetElement);
+            targetElement.scrollIntoView();
           }
         });
       });
-
-      // ... rest of your existing JavaScript ...
     </script>
   </body>
 </html>
